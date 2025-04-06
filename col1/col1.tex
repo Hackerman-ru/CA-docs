@@ -1,0 +1,199 @@
+\documentclass[a4paper, 12pt]{article}
+
+\usepackage[T2A]{fontenc}
+\usepackage[russian, english]{babel}
+\usepackage[utf8]{inputenc}
+\usepackage{subfiles}
+\usepackage{ucs}
+\usepackage{textcomp}
+\usepackage{array}
+\usepackage{indentfirst}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{enumerate}
+\usepackage[margin=1.5cm]{geometry}
+\usepackage{authblk}
+\usepackage{tikz}
+\usepackage{icomma}
+\usepackage{gensymb}
+\usepackage{graphicx}
+\usepackage{comment}
+\usepackage{titlesec}
+\usepackage[unicode=true, colorlinks=true, linkcolor=blue, urlcolor=blue]{hyperref}
+
+% Всякие мат штуки дополнительные
+
+\newcommand{\F}{\mathbb{F}}
+\renewcommand{\C}{\mathbb{C}}
+\newcommand{\RC}{\overline{\C}}
+\newcommand{\N} {\mathbb{N}}
+\newcommand{\Z} {\mathbb{Z}}
+\newcommand{\R} {\mathbb{R}}
+\newcommand{\I} {\mathbb{I}}
+\newcommand{\Q}{\mathbb{Q}}
+\renewcommand{\O}{\mathcal{O}}
+\newcommand{\ord} {\mathop{\rm ord}}
+\newcommand{\Ima}{\mathop{\rm Im}}
+\newcommand{\Rea}{\mathop{\rm Re}}
+\newcommand{\rk}{\mathop{\rm rk}}
+\newcommand{\Nor}{\mathcal{N}}
+\newcommand{\Exp}{\mathop{\rm Exp}}
+\newcommand{\E}{\mathbb{E}}
+\renewcommand{\P}{\mathbb{P}}
+\newcommand{\Var}{\mathop{\rm Var}}
+\newcommand{\arccosh}{\mathop{\rm arccosh}}
+\newcommand{\lra}{\Leftrightarrow}
+\newcommand{\lker}{\mathop{\rm lker}}
+\newcommand{\rker}{\mathop{\rm rker}}
+\newcommand{\tr}{\mathop{\rm tr}}
+\newcommand{\e}{\varepsilon}
+\newcommand{\ph}{\varphi}
+\newcommand{\al}{\alpha}
+\newcommand{\be}{\beta}
+\newcommand{\sgn}{\mathop{\rm sgn}}
+\newcommand{\cov}{\mathop{\rm cov}}
+\newcommand{\la}{\lambda}
+\newcommand{\St}{\mathop{\rm St}}
+\newcommand{\Mat}{\mathop{\rm Mat}}
+\newcommand{\grad}{\mathop{\rm grad}}
+\newcommand{\Ge}{\text{Ж}}
+\newcommand{\OGe}{\Ge^{-1}}
+\DeclareMathOperator{\spec}{spec}
+\DeclareMathOperator{\arcsinh}{arcsinh}
+\DeclareMathOperator{\arctanh}{arctanh}
+\DeclareMathOperator{\arccoth}{arcCoth}
+\makeatletter
+\newcommand{\fcolon}{%
+  \mathrel{\mathpalette\fcolon@\relax}%
+}
+\newcommand{\fcolon@}[2]{%
+  \sbox\z@{$\m@th#1:$}%
+  \vbox to\ht\z@{%
+    \hbox{$\m@th#1.$}%
+    \vss
+    \hbox{$\m@th#1.$}%
+    \vss
+    \hbox{$\m@th#1.$}%
+  }%
+}
+\newcommand{\m}[1]{\q(\bmod\q #1)}
+
+\usepackage{listings}
+\usepackage{xcolor}
+\usepackage{pgfplots}
+
+
+\pgfplotsset{compat=1.18, width=10cm}
+
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+
+\expandafter\let\expandafter\originald\csname\encodingdefault\string\d\endcsname
+\DeclareRobustCommand*\d
+  {\ifmmode\mathop{}\!\mathrm{d}\else\expandafter\originald\fi}
+
+\lstdefinestyle{mystyle}{
+    backgroundcolor=\color{backcolour},
+    commentstyle=\color{codegreen},
+    keywordstyle=\color{magenta},
+    numberstyle=\tiny\color{codegray},
+    stringstyle=\color{codepurple},
+    basicstyle=\ttfamily\footnotesize,
+    breakatwhitespace=false,
+    breaklines=true,
+    captionpos=b,
+    keepspaces=true,
+    numbers=left,
+    numbersep=5pt,
+    showspaces=false,
+    showstringspaces=false,
+    showtabs=false,
+    tabsize=2
+}
+
+\lstset{style=mystyle}
+
+% Всякое для ускорения
+\renewcommand{\r}{\right}
+\renewcommand{\l}{\left}
+\newcommand{\de}{\Delta}
+\newcommand{\tpn}{\overset{\text{п.н.}}{\to}}
+\newcommand{\td}{\overset{\d}{\to}}
+\newcommand{\tp}{\overset{\mathop{\rm P}}{\to}}
+\newcommand{\Sum}[2]{\overset{#2}{\underset{#1}{\sum}}}
+\newcommand{\Lim}[2]{\lim\limits_{#1 \rightarrow #2}}
+\newcommand{\lowlim}[2]{\lim\limits_{\overline{#1 \rightarrow #2}}}
+\newcommand{\uplim}[2]{\overline{\lim\limits_{#1 \rightarrow #2}}}
+\newcommand{\Sup}[1]{\sup\limits_{#1}}
+\newcommand{\Inf}[1]{\inf\limits_{#1}}
+\newcommand{\p}[2]{\frac{\partial #1}{\partial #2}}
+\newcommand{\q}{\hspace{0.2cm}}
+\newcommand{\B}[2]{\mathop{\rm B}\left(#1,#2\right)}
+\newcommand{\G}[1]{\mathop{\rm \text{Г}}\left(#1\right)}
+\newcommand{\g}{\mathop{\rm \text{Г}}}
+\newcommand{\Ln}{\mathop{\rm Ln}}
+
+% Заголовки
+\newcommand{\task}[1] {\noindent \textbf{Задача #1.} \hfill}
+\newcommand{\note}[1] {\noindent \textbf{Примечание #1.} \hfill}
+
+% Пространтсва для задач
+\newenvironment{definition}[1][Определение]{%
+	\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1:}]
+}{
+	\end{trivlist}
+}
+
+\newenvironment{theorem}[1][]{%
+	\begin{trivlist}
+    \item[\hskip \labelsep {\bfseries Теорема#1:}]
+}{ 
+	\end{trivlist}
+}
+
+\newenvironment{proof}[1][Доказательство]{%
+	\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1:}]
+		\item \hspace{15pt}
+}{
+	$ \hfill\blacksquare $
+	\end{trivlist}
+	\hfill\break
+}
+\newenvironment{solution}[1][Решение]{%
+	\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1:}]
+		\item \hspace{15pt}
+}{
+	\end{trivlist}
+}
+
+\newenvironment{answer}[1][Ответ]{%
+	\begin{trivlist}
+		\item[\hskip \labelsep {\bfseries #1:}] \hskip \labelsep
+}{
+	\end{trivlist}
+    \hfill
+}
+
+\titleformat{\subsection}
+  {\normalfont\fontsize{12}{15}\bfseries}{\thesubsection}{1em}{}
+
+\title{\textbf{Комплексный анализ} \\
+	\large \vspace{10cm}\textbf{Коллоквиум 1}}
+\date{\vspace{10cm}\today}
+\author{Корняков Санан}
+\affil{БПМИ223}
+
+\begin{document}
+\renewcommand{\contentsname}{Оглавление}
+\maketitle
+\newpage
+\tableofcontents
+\input{definitions}
+\input{proofs}
+\input{abstract}
+\end{document}

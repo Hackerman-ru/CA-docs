@@ -1,0 +1,555 @@
+\ProvidesFile{abstract.tex}[Билеты]
+\newpage
+\section{Ряд Лорана}
+\subsection{Теорема о разложении в ряд Лорана функции в кольце голоморфности}
+\begin{theorem}
+  Пусть $f\in\O(V),\q V= \left\{r<|z-a|<R\right\},\q 0\leqslant r<R\leqslant \infty$. Обозначим
+  \[c_n = \frac{1}{2\pi i} \oint\limits_{|z-a|=\rho}\frac{f(z)}{(z-a)^{n+1}}\d z,\q \rho\in(r,R)\]
+  Тогда $\forall z \in V$
+  \[f(z) = \Sum{n\in\Z}{}c_n(z-a)^n\]
+\end{theorem}
+\begin{proof}
+Фиксируем $z\in V$. Выберем $\rho_1,\q\rho_2\colon r < \rho_1 < |z - a| < \rho_2 < R$. По интегральной формуле Коши (напоминание):
+  \begin{center}
+    \includegraphics[scale=0.5]{1.png}
+  \end{center}
+  Получаем, что
+  \[f(z) = \frac{1}{2\pi i} \oint\limits_{\partial \left(\left\{\rho_1<|\zeta-a|<\rho_2\right\}\right)}\frac{f(\zeta)}{\zeta-z}\d \zeta=\]
+  \[=\frac{1}{2\pi i} \left(\oint\limits_{|\zeta-a|=\rho_2}\frac{f(\zeta)}{\zeta-z}\d \zeta - \oint\limits_{|\zeta-a|=\rho_1}\frac{f(\zeta)}{\zeta-z}\d \zeta\right) = \]
+  \[=\frac{1}{2\pi i} \left(\oint\limits_{|\zeta-a|=\rho_2}\frac{f(\zeta)}{\zeta-a-(z-a)}\d \zeta - \oint\limits_{|\zeta-a|=\rho_1}\frac{f(\zeta)}{\zeta-a-(z-a)}\d \zeta\right)=\]
+  \[=\frac{1}{2\pi i} \left(\oint\limits_{|\zeta-a|=\rho_2}\frac{f(\zeta)}{\zeta-a}\cdot \frac{1}{1-\frac{z-a}{\zeta-a}}\d \zeta + \oint\limits_{|\zeta-a|=\rho_1}\frac{f(\zeta)}{z-a}\cdot \frac{1}{1- \frac{\zeta-a}{z-a}}\d \zeta\right)=\]
+  \[=\frac{1}{2\pi i} \left(\oint\limits_{|\zeta-a|=\rho_2}\frac{f(\zeta)}{\zeta-a}\cdot \Sum{n=0}{\infty}\left(\frac{z-a}{\zeta-a}\right)^n\d \zeta + \oint\limits_{|\zeta-a|=\rho_1}\frac{f(\zeta)}{z-a}\cdot \Sum{n=0}{\infty}\left(\frac{\zeta-a}{z-a}\right)^n\d \zeta\right)=\]
+  Оценим модуль ряда. Пусть $M = \Sup{|\zeta-a|=\rho_2}|f(\zeta)|$, тогда
+  \[\left|\Sum{n=0}{\infty}\frac{f(\zeta)(z-a)^n}{(\zeta-a)^{n+1}}\right|\leqslant\Sum{n=0}{\infty}\left|\frac{f(\zeta)(z-a)^n}{(\zeta-a)^{n+1}}\right|\leqslant \Sum{n=0}{\infty}\frac{M}{\rho_2}\cdot \frac{|z-a|^n}{\rho_2^n}\]
+  Сходится как бесконечно убывающая геом. прогрессия и не зависит от $\zeta$. Значит по теореме Вейерштрасса изначальный ряд сходится абсолютно и равномерно, а значит его можно переставить с интегралом. Аналогично доказыватеся равномерная сходимость и второго ряда. Получаем:
+  \[=\frac{1}{2\pi i} \Sum{n=0}{\infty} \left(\oint\limits_{|\zeta-a|=\rho_2}\frac{f(\zeta)(z-a)^n}{(\zeta-a)^{n+1}}\d \zeta + \oint\limits_{|\zeta-a|=\rho_1}\frac{f(\zeta)(\zeta-a)^n}{(z-a)^{n+1}}\d \zeta\right)=\]
+  \[=\frac{1}{2\pi i} \Sum{n=0}{\infty} \left((z-a)^n\oint\limits_{|\zeta-a|=\rho_2}\frac{f(\zeta)}{(\zeta-a)^{n+1}}\d \zeta + (z-a)^{-n-1}\oint\limits_{|\zeta-a|=\rho_1}f(\zeta)(\zeta-a)^n\d \zeta\right)=\]
+  Заметим, что мы получили выражения для $c_n$ и $c_{-n-1}$ соответственно: 
+  \[=\Sum{n=0}{\infty} \left((z-a)^nc_n + (z-a)^{-n-1}c_{-n-1}\right) = \Sum{n\in\Z}{}c_n(z-a)^n\]
+\end{proof}
+\subsection{Формулы для коэффициентов ряда Лорана}
+\begin{definition}
+  Пусть $f\in\O(V),\q V= \left\{r<|z-a|<R\right\},\q 0\leqslant r<R\leqslant \infty$. Тогда коэффициенты ряда Лорана - это
+\[c_n = \frac{1}{2\pi i} \oint\limits_{|z-a|=\rho}\frac{f(z)}{(z-a)^{n+1}}\d z,\q \rho\in(r,R)\]
+\end{definition}
+\subsection{Формулы для радиусов кольца голоморфности ряда Лорана}
+\begin{theorem}
+  Дан ряд $\Sum{n\in\Z}{}c_n(z-a)^n$. Обозначим
+  \[R:= \frac{1}{\uplim{n}{\infty}\sqrt[n]{|c_n|}},\q r:= \uplim{n}{\infty}\sqrt[n]{|c_{-n}|}\]
+  Тогда ряд сходится в $V:= \left\{r < |z-a|<R \right\}$ к некоторой функции $f\in\O(V)$, причём абсолютно и равномерно на любом компакте $K\ll V$. 
+\end{theorem}
+\subsection{Понятие главной и правильной части Лорана (в конечной точке и в бесконечности)}
+\begin{definition}
+  Пусть $\Sum{n=-\infty}{+\infty}c_n(z-a)^n$ - ряд Лорана в конечной точке $a\in\C$. Тогда
+  \begin{itemize}
+    \item Ряд $\Sum{n=0}{+\infty}c_n(z-a)^n$ называют правильной частью
+    \item Ряд $\Sum{n=-\infty}{-1}c_n(z-a)^n$ называют главной частью
+  \end{itemize}
+  Пусть $\Sum{n=-\infty}{+\infty}c_nz^n$ - ряд Лорана в бесконечности. Тогда
+  \begin{itemize}
+    \item Ряд $\Sum{n=-\infty}{0}c_nz^n$ называют правильной частью
+    \item Ряд $\Sum{n=1}{+\infty}c_nz^n$ называют главной частью
+  \end{itemize}
+\end{definition}
+\section{Изолированные особые точки}
+\subsection{Изолированная особая точка}
+\begin{definition}
+  Точка $a\in\C$ называется ИОТ функции $f$, если $f\notin\O(a)$, но $f\in\O(\overset{\circ}{U}_\delta(a))$ 
+\end{definition}
+\begin{definition}
+  Точка $a=\infty$ называется ИОТ функции $f$, если $f\in\O(|z|>R)$ при некотором $R>0$.
+
+  Тип ИОТ в $\infty$ совпадает с типом ИОТ для $g(z):=f(\frac{1}{z})$ в $a=0$.
+\end{definition}
+\textbf{Примечание:} Далее в этой секции определения и теоремы даются при $a\in\C$, полагая, что для $a=\infty$ рассматривается $f(\frac{1}{z})$ в $a=0$. 
+\subsection{Устранимая особая точка}
+\begin{definition}
+  Пусть $a\in\C$ - ИОТ функции $f$. Если $\exists \Lim{z}{a}f(z)\in\C$, то $a$ - УОТ.
+\end{definition}
+\subsection{Теорема об описании УОТ}
+\begin{theorem}
+  Пусть $a\in\C$ - ИОТ функции $f$. Тогда следующие утверждения эквивалентны:
+  \begin{enumerate}
+    \item $a$ - УОТ функции $f$
+    \item $f\in{\rm B} \left(\overset{\circ}{U}_\delta(a)\right)$
+    \item Коэффициенты в ряде Лорана функции $f$ с центром в точке $a$: 
+    \[c_n=0,\q \forall n\leqslant -1\]
+    \item Можно доопределить $f$ до $g\in\O(U_\delta(a))$ 
+  \end{enumerate}
+\end{theorem}
+\begin{proof}
+ \begin{itemize}
+  \item $1\implies 2\colon$ очев, так как существует предел
+  \item $2\implies 3$: Пусть
+   \[\mu(\rho):=\Sup{|z-a|=\rho}|f(z)|\]
+   Тогда
+   \[|c_n|=\left|\frac{1}{2\pi i} \oint\limits_{|z-a|=\rho}\frac{f(z)}{(z-a)^{n+1}}\d z\right|\leqslant \frac{1}{2\pi}\oint\limits_{|z-a|=\rho}\left|\frac{f(z)}{(z-a)^{n+1}}\right|\d z\leqslant \frac{\mu(\rho)}{\rho^{n+1}}\cdot \frac{1}{2\pi} \cdot 2\pi \rho = \frac{\mu(\rho)}{\rho^n}\]
+   Пусть $C = \Sup{\overset{\circ}{U}_\delta(a)}|f(z)|$. Тогда $\forall \rho\in(0,\min(1,\delta))$ и $\forall n\leqslant -1$ 
+   \[|c_n|\leqslant \frac{\mu(\rho)}{\rho^n}\leqslant C\rho^{-n}\to 0,\q \rho\to 0\]
+   А так как $c_n$ не зависит от $\rho$, то $c_n=0$. 
+   \item $3\implies 4$: Знаем, что
+   \[f(z)=\Sum{n=0}{+\infty}c_n(z-a)^n\q\forall z\in \overset{\circ}{U}_\delta(a)\]
+   Тогда доопределим $f(a):=c_0$. Равенство будет теперь верно $\forall z\in U_\delta(a)$, значит функция разложилась в ряд Тейлора в $U_\delta(a)$, а тогда $f\in\O(U_\delta(a))$.
+   \item $4\implies 1$: очевидно, так как голоморфная функция непрерывна.
+ \end{itemize} 
+\end{proof}
+\subsection{Полюс}
+\begin{definition}
+  Пусть $a\in\C$ - ИОТ функции $f$. Если $\Lim{z}{a}f(z) = \infty$, то $a$ - полюс 
+\end{definition}
+\subsection{Порядок полюса}
+\begin{definition}
+  Пусть $a\in\C$ - полюс функции $f$. Тогда порядком полюса называется порядок нуля функции $\frac{1}{f(z)}$ в точке $a$.
+
+  По теореме, он совпадает с числом $N\in\N\colon c_{-N}\neq 0$ и $\forall n>N$ $c_{-n}=0$. 
+\end{definition}
+\subsection{Существенная особая точка}
+\begin{definition}
+  Пусть $a\in\C$ - ИОТ функции $f$. Если $\nexists\Lim{z}{a}f(z)$, то $a$ - СОТ
+\end{definition}
+\subsection{Теорема Сохоцкого}
+\begin{theorem}
+  Пусть $a\in\C$ - СОТ функции $f$. Тогда $\forall A\in\overline{\C}$ $\exists z_n\to a\colon f(z_n)\to A$. 
+\end{theorem}
+\begin{proof}
+ Два случая:
+  \begin{enumerate}
+    \item $A=\infty$. Если $f\in {\rm B}(\overset{\circ}{U}_\delta(a))$, то по теореме $a$ - УОТ, противоречие. Значит $f$ там неограниченно, а тогда $\forall M\in\R\q\exists z\in \overset{\circ}{U}_{\delta}(a)\colon |f(z)|>M\implies \exists z_n\colon f(z_n)\to \infty$  
+    \item $A\in\C$. Тогда либо $\forall \e>0\q\exists z\in \overset{\circ}{U}_{\e}(a)\colon f(z)=A$, либо $\exists \e>0\colon \forall z\in \overset{\circ}{U}_{\e}(a)\q f(z)\neq A$. Тогда можно определить
+    \[g(z):=\frac{1}{f(z)-A}\in\O(\overset{\circ}{U}_{\e}(a))\]
+    Значит точка $a$ - ИОТ для функции $g$. Заметим, что
+    \[f(z) = \frac{1}{g(z)}+A\]
+    \begin{itemize}
+      \item Если $\Lim{z}{a}g(z)\in \overline{\C}\setminus \left\{0\right\}$, то для $f$ точка $a$ - УОТ
+      \item Если $\Lim{z}{a}g(z)= 0$, то для $f$ точка $a$ - полюс 
+    \end{itemize}
+    Но по дано она СОТ - противоречие, значит $a$ - СОТ для $g$. Тогда по первому случаю $\exists z_n\colon g(z_n)\to \infty$, а значит $f(z_n)\to A$. 
+  \end{enumerate}
+\end{proof}
+\subsection{Связь классификации ИОТ и ряда Лорана}
+\begin{theorem}
+  Пусть $a\in\C$ - ИОТ функции $f$. Тогда в $\overset{\circ}{U}_\delta(a)$
+  \begin{enumerate}
+    \item Если $a$ - УОТ, то $f(z) = \Sum{n=0}{+\infty}c_n(z-a)^n$
+    \item Если $a$ - полюс, то $f(z) = \Sum{n=-N}{+\infty}c_n(z-a)^n$, где $N$ - порядок полюса
+    \item Если $a$ - СОТ, то $f(z) = \Sum{n=-\infty}{+\infty}c_n(z-a)^n$ и $\forall N\in\N\q \exists n>N\colon c_{-n}\neq 0$
+  \end{enumerate}
+
+  Пусть $a=\infty$ - ИОТ функции $f$. Тогда в $\left\{|z|>R\right\}$
+  \begin{enumerate}
+    \item Если $a = \infty$ - УОТ, то $f(z) = \Sum{n=-\infty}{0}c_nz^n$
+    \item Если $a = \infty$ - полюс, то $f(z) = \Sum{n=-\infty}{N}c_nz^n$, где $N$ - порядок полюса
+    \item Если $a = \infty$ - СОТ, то $f(z) = \Sum{n=-\infty}{+\infty}c_nz^n$ и $\forall N\in\N\q \exists n>N\colon c_n\neq 0$ 
+  \end{enumerate}
+\end{theorem}
+\subsection{Большая теорема Пикара}
+\begin{theorem}
+  Пусть точка $a\in\overline{\C}$ - СОТ функции $f$. Тогда $\forall A\in\C$, кроме, быть может, одного, $\exists z_n\to a\colon f(z_n) = A$.
+\end{theorem}
+Например, функция $e^{1/z}$ имеет СОТ в 0, но нигде не принимает значения 0. 
+\subsection{Целая функция}
+\begin{definition}
+  $f$ - целая, если $f\in\O(\C)$
+\end{definition}
+\subsection{Мероморфная функция}
+\begin{definition}
+  $f$ - мероморфная функция в $D\subset \overline{\C}$, если все ИОТ в $D$ - полюса, т.е. \\$f\in\O(D\setminus M)$, где $M$ - множество всех полюсов функции $f$ в $D$.
+
+  $M$ не более чем счётно. 
+\end{definition}
+\subsection{Теоремы о целой функции с УОТ или полюсом в бесконечности}
+\begin{theorem}
+  Пусть $f$ целая и $a=\infty$ - УОТ. Тогда $f\equiv const$. 
+\end{theorem}
+\begin{proof}
+  $\Lim{z}{\infty}f(z)=A\in\C\implies f\in {\rm B}(\C)$, тогда по теореме Лиувилля $f\equiv const$. 
+\end{proof}
+\begin{theorem}
+  Пусть $f$ целая и $a=\infty$ - полюс $N$ порядка . Тогда $f=P_N(z)$ - многочлен степени $N$. 
+\end{theorem}
+\begin{proof}
+  Знаем, что $f(z) = P_N(z) + \Sum{n=-\infty}{0}c_nz^n$. Обозначим $g(z):=f(z) - P_N(z)\in\O(\C)$. Тогда $\Lim{z}{\infty}g(z) = c_0\implies g\equiv const$ по предыдущей теореме, а значит $f(z) = P_N(z) + c_0$.
+\end{proof}
+\subsection{Теорема о мероморфной функции с УОТ или полюсом в бесконечности}
+\begin{theorem}
+  Пусть $f$ мероморфна в $\C$ и $a=\infty$ - УОТ или полюс. Тогда $f$ - рациональная функция. 
+\end{theorem}
+\begin{proof}
+  Т.к. $a=\infty$ - ИОТ, то к ней не подходит ни одна последовательность из полюсов, а значит все полюса находятся в некотором круге $\left\{|z|<R\right\}$.
+
+  Если множество полюсов $M$ счётно, то можно выбрать сходящуюся подпоследовательность полюсов в нашем компакте $\left\{|z|\leqslant R\right\}$, пусть они сходятся к некоторой точке $b\in \left\{|z|\leqslant R\right\}$.
+  \begin{enumerate}
+    \item Пусть $f(b)\in\C$. Так как функция мероморфна в $\C$, то $\exists U_\delta(b)$, где $|f(z)|\leqslant C$, но в любой такой окрестности есть полюс - противоречие.
+    \item Пусть $\Lim{z}{b}f(z) = \infty$. Так как функция мероморфна в $\C$, то $b$ - полюс, но в любой $\overset{\circ}{U}_\delta(b)$ есть полюса, значит $b$ не ИОТ - противоречие. 
+  \end{enumerate}
+
+  Таким образом, $M$ конечное множество. Пусть $M = \left\{a_1,\dots,a_N\right\}$. В $\overset{\circ}{U}_\delta(a_k)$ функция раскладывается в ряд лорана:
+  \[f(z) = \Sum{n=-N_k}{-1}c_{n}(z-a_k)^n + \Sum{n=0}{+\infty}\dots\]
+  Пусть $R_k(z):=\Sum{n=-N_k}{-1}c_{n}(z-a_k)^n$ - рациональные функции. Заметим, что они голоморфны в $\overset{\circ}{U}_\delta(a_m)\colon m\neq k$, т.е. не дают вклад в главную часть при разложении функции в другой точке.
+
+  В $a=\infty$ $f(z) = P_N(z) + \Sum{n=-\infty}{0}\dots$. Обозначим
+   \[g(z) := f(z) - R_1(z) - \dots - R_N(z) - P_N(z)\]
+   Тогда $g\in\O(\C)$, причём точка $a=\infty$ - УОТ для $g$, значит по предыдущей теореме $g\equiv const$, а тогда
+   \[f = const + \Sum{k=1}{N}R_k(z) + P_N(z)\] 
+\end{proof}
+\subsection{Малая теорема Пикара}
+\begin{theorem}
+  Пусть $f$ целая и не константа. Тогда образ $f$ - это $\C$, за исключением, быть может, одной точки.
+\end{theorem}
+\section{Вычеты}
+\subsection{Вычет в конечной точке}
+\begin{definition}
+  Вычетом функции $f$ в ИОТ $a\in\C$ называется
+  \[\res{z=a}f:=\frac{1}{2\pi i}\oint\limits_{|z-a|=r}f(z)\d z\]
+  где $f\in\O(\overset{\circ}{U}_\e(a)),\q r<\e$
+\end{definition}
+\subsection{Вычет в бесконечности}
+\begin{definition}
+  Вычетом функции $f$ в ИОТ $a=\infty$ называется
+  \[\res{\infty}f:=-\frac{1}{2\pi i} \oint\limits_{|z|=r}f(z)\d z\]
+  где $f\in\O(|z|>R)$, $r>R$
+\end{definition}
+\subsection{Теорема Коши о вычетах}
+\begin{theorem}
+  Пусть $f\in\O(D\setminus \left\{a_1,\dots,a_n\right\})$; $\overline{G}\subset D$; $a_1,\dots,a_n\in G$ и   $\partial G$ состоит из конечного числа кусочно гладких замкнутых жордановых кривых. Тогда
+  \[\oint\limits_{\partial G}f(z)\d z = 2\pi i \Sum{k=1}{n}\res{z=a_k}f\]
+\end{theorem}
+\begin{proof}
+ Вырежем круги около этих особых точек и обозначим
+  \[\widetilde{G} := G\setminus \left(\bigcup_{k=1}^n U_{\e_k}(a_k)\right)\]
+  По ИТК для многосвязной области
+  \[\oint\limits_{\partial\widetilde{G}}f(z)\d z=0\]
+  что равносильно
+  \[\oint\limits_{\partial G}f(z)\d z=\Sum{k=1}{n}\oint\limits_{|z-a|=\e_k}f(z)\d z = 2\pi i \Sum{k=1}{n}\res{z=a_k}f\]
+\end{proof}
+\subsection{Связь вычета и ряда Лорана в конечной точке}
+\begin{theorem}
+  Пусть $a\in\C$ - ИОТ функции $f$, и $f$ раскладывается в ряд Лорана $\Sum{n\in\Z}{}c_n(z-a)^n$ в некотором кольце $\overset{\circ}{U}_\e(a)$. Тогда
+  \[\res{z=a}f = c_{-1}\]
+\end{theorem}
+\begin{proof}
+  Распишем по определению:
+  \[\res{z=a}f = \frac{1}{2\pi i} \oint\limits_{|z-a|=r}f(z)\d z = \frac{1}{2\pi i} \oint\limits_{|z-a|=r}\Sum{n\in\Z}{}c_n(z-a)^n\d z=\]
+  Так как ряд Лорана на компакте $\left\{|z-a|=r\right\}$ сходится абсолютно и равномерно, то
+  \[=\frac{1}{2\pi i} \Sum{n\in\Z}{} c_n\oint\limits_{|z-a|=r}(z-a)^n\d z\]
+  Заметим, что
+  \[\oint\limits_{|z-a|=r}(z-a)^n\d z=|t:=z-a|=\oint\limits_{|t|=r}t^n\d t = \begin{cases}
+    0, &\text{ if } n\neq -1\\
+    2\pi i, &\text{ if } n = -1\\
+  \end{cases}\]
+  Поэтому получим:
+  \[\res{z=a}f = \frac{1}{2\pi i} \cdot c_{-1} \cdot 2\pi i = c_{-1}\]
+\end{proof}
+\subsection{Связь вычета и ряда Лорана в бесконечности}
+\begin{theorem}
+  Пусть $f\in\O(|z|>R)$ и в этом кольце $f(z) = \Sum{n\in\Z}{}c_nz^n$. Тогда
+  \[\res{\infty}f=-c_{-1}\]
+\end{theorem}
+\begin{proof}
+  Распишем по определению:
+  \[\res{\infty}f = -\frac{1}{2\pi i} \oint\limits_{|z|=r}f(z)\d z = -\frac{1}{2\pi i} \oint\limits_{|z|=r}\Sum{n\in\Z}{}c_nz^n\d z=\]
+  Так как ряд Лорана на компакте $\left\{|z|=r\right\}$ сходится абсолютно и равномерно, то
+  \[=-\frac{1}{2\pi i} \Sum{n\in\Z}{} c_n\oint\limits_{|z|=r}z^n\d z = - \frac{1}{2\pi i} \cdot c_{-1} \cdot 2\pi i = -c_{-1}\]
+\end{proof}
+\subsection{Формулы для вычисления вычета в полюсе произвольного порядка}
+\begin{enumerate}
+  \item $a\in\C$ - полюс 1 порядка функции $f$. Представим функцию в виде
+  \[f(z) = \frac{\ph(z)}{\psi(z)}\]
+  где $\ph(a)\neq 0,\q \psi(a)=0,\q \psi'(a)\neq 0$. Тогда
+  \[\res{z=a}f = \frac{\ph(a)}{\psi'(a)}\]
+  \item $a\in\C$ - полюс N порядка функции $f$. Тогда
+  \[\res{z=a}f = \frac{1}{(N-1)!}\cdot \Lim{z}{a} \left((z-a)^Nf(z)\right)^{(N-1)}\]
+  где $(N-1)$ --- взятие $N-1$-ой производной. 
+\end{enumerate}
+\subsection{Формула для вычисления вычета в бесконечности, являющейся УОТ}
+Пусть $a=\infty$ - УОТ функции $f$. Тогда
+\[\res{\infty}f= \Lim{z}{\infty}z(f(\infty) - f(z))\]
+где $f(\infty):=\Lim{z}{\infty}f(z)\in\C$
+\subsection{Формула для сведения вычета в бесконечности к вычету в нуле}
+Пусть $a=\infty$ - ИОТ функции $f$. Тогда
+\[\res{\infty}f = -\res{0} \left(\frac{1}{z^2}\cdot f\left(\frac{1}{z}\right)\right)\]
+\subsection{Теорема о полной сумме вычетов}
+\begin{theorem}
+  Пусть $f\in\O(\C\setminus \left\{a_1,\dots,a_n\right\})$. Тогда
+  \[\res{\infty}f + \Sum{k=1}{n}\res{z=a_k}f = 0\]
+\end{theorem}
+\begin{proof}
+  $\exists R>0\colon |a_i|<R,\q \forall i$. Тогда по теореме Коши о вычетах
+  \[\frac{1}{2\pi i}\oint\limits_{|z|=R}f(z)\d z = \Sum{k=1}{n}\res{z=a_k}f\]
+  Но по определению
+  \[\res{\infty}f = -\frac{1}{2\pi i}\oint\limits_{|z|=R}f(z)\d z\]
+  Значит
+  \[\res{\infty}f + \Sum{k=1}{n}\res{z=a_k}f = 0\]
+\end{proof}
+\subsection{Лемма Жордана}
+\begin{lemma}
+  Пусть $f\in\O(\Ima z > 0,\q |z|>R_0)$. Рассмотрим дугу
+  \begin{center}
+    \includegraphics{2.png}
+  \end{center}
+  где $R>R_0$, назовём её $\gamma_R$. Обозначим за $M(R):=\Sup{z\in\gamma_R}|f(z)|$. Пусть нам известно, что $\Lim{R}{\infty}M(R)=0$. Тогда $\forall \la>0$
+  \[\int\limits_{z\in\gamma_R}f(z)e^{i\la z}\d z\to0,\q R\to \infty\]
+\end{lemma}
+\begin{proof}
+ Оценим модуль:
+  \[\left|\int\limits_{z\in\gamma_R}f(z)e^{i\la z}\d z\right|=|z=:Re^{i\ph},\q \ph\in[0,\pi]|=\left|\int_{0}^{\pi}f \left(e^{i\ph}R\right)e^{i\la R\left(\cos(\ph) + i\sin(\ph)\right)}\cdot Rie^{i\ph}\d \ph\right|\leqslant\]
+  \[\leqslant \int_{0}^{\pi}M(R)e^{-\la R\sin(\ph)}R\d \ph = 2\int_{0}^{\frac{\pi}{2}}M(R)e^{-\la R\sin(\ph)}R\d \ph\]
+  Заметим, что $\sin(\ph)\geqslant \frac{2}{\pi}\ph$ при $\ph\in[0,\frac{\pi}{2}]$:
+  \begin{center}
+    \includegraphics[scale=0.5]{3.png}
+  \end{center}
+  а значит
+  \[2\int_{0}^{\frac{\pi}{2}}M(R)e^{-\la R\sin(\ph)}R\d \ph\leqslant 2M(R)R \cdot \int_{0}^{\frac{\pi}{2}}e^{-\frac{2\la R}{\pi}\ph}\d \ph=\]
+  \[=2M(R)R \left(-\frac{\pi}{2\la R}\right) \left(e^{-\la R}-1\right) = 2M(R)(e^{-\la R}-1)\to 0,\q R\to \infty\]
+\end{proof}
+\subsection{Логарифмический вычет}
+\begin{definition}
+  Пусть $f\in\O(0<|z-a|<r)$ и $f\neq 0$ в этом кольце. Тогда её логарифмическим вычетом называется
+  \[\res{z=a}\frac{f'}{f}\]
+\end{definition}
+\subsection{Теорема о связи логарифмического вычета с порядком нуля и полюса функции}
+\begin{theorem}
+  Пусть функция $f$ имеет в точке $a\in\overline{\C}$ ноль кратности $n$, тогда
+  \[\res{z=a}\frac{f'}{f}=n\]
+  А если в точке $a\in\overline{\C}$ функция имеет полюс кратности $n$, то
+  \[\res{z=a}\frac{f'}{f}=-n\]
+\end{theorem}
+\begin{proof}
+  \begin{enumerate}
+    \item 
+    \begin{itemize}
+      \item Пусть $a\in\C$. Представим $f$ в виде
+      \[f(z)=(z-a)^ng(z),\q g(z)\neq 0\q\forall z\in U_\delta(a)\]
+      Тогда
+      \[f'(z) = n(z-a)^{n-1}g(z) + (z-a)^ng'(z)\]
+      \[\frac{f'(z)}{f(z)} = \frac{n(z-a)^{n-1}g(z) + (z-a)^ng'(z)}{(z-a)^ng(z)}=\frac{n}{z-a} + \frac{g'(z)}{g(z)}\]
+      где $\frac{g'(z)}{g(z)}\in\O(U_\delta(a))$, значит это слагаемое не вносит вклад в отрицательную часть ряда Лорана. Получаем, что
+      \[\res{z=a}\frac{f'}{f} = \res{z=a}\frac{n}{z-a} = n\]
+      так как это уже и есть $c_{-1}$ коэффициент.
+      \item Пусть $a=\infty$. Тогда
+      \[f(z) = \frac{g(z)}{z^n},\q g(z)\neq 0\q\forall z\in \left\{|z|>R_0\right\}\]
+      \[f'(z) = \frac{g'(z)z^n - ng(z)z^{n-1}}{z^{2n}}\]
+      \[\frac{f'(z)}{f(z)} = \frac{\frac{g'(z)z^n - ng(z)z^{n-1}}{z^{2n}}}{\frac{g(z)}{z^n}} = \frac{g'(z)z^n - ng(z)z^{n-1}}{z^ng(z)} = \frac{g'(z)}{g(z)} - \frac{n}{z}\]
+      где $\frac{g'(z)}{g(z)}\in\O(\left\{|z|>R_0\right\})$, значит это слагаемое не вносит вклад в отрицательную часть ряда Лорана. Получаем, что
+      \[\res{\infty}\frac{f'}{f} = \res{\infty}\left(-\frac{n}{z}\right)=n\]
+    \end{itemize}
+    \item Рассмотрим функцию $g(z):=\frac{1}{f(z)}$. Тогда для неё $a$ - ноль кратности $n$, а значит так как
+    \[\frac{f'}{f} = \frac{-g'}{g^2}\cdot g = - \frac{g'}{g}\]
+    то
+    \[\res{z=a}\frac{f'}{f} = -\res{z=a}\frac{g'}{g} = -n\]
+  \end{enumerate}
+\end{proof}
+\section{Нули функций и аргументы вдоль пути}
+\subsection{Теорема о числе нулей и полюсов мероморфной функции в области}
+\begin{theorem}
+  Пусть $f$ мероморфна в области $D$, $\overline{G}\subset D$, на границу $\partial G$ не попали точки $\infty$ и нули функции $f$, $\partial G$ состоит из конечного числа кусочно гладких замкнутых жордановых кривых. Назовём $N(f,G)$ - количество нулей функции $f$ в $G$ с учётом кратности, а $P(f,G)$ - полюсов. Тогда
+  \[N(f,G) - P(f,G) = \frac{1}{2\pi i}\oint\limits_{\partial G}\frac{f'(z)}{f(z)}\d z\]
+\end{theorem}
+\subsection{Теорема о существовании функции аргумента}
+\begin{theorem}
+  Пусть $\Gamma\colon [0,1]\to \C\setminus \left\{0\right\}$. Тогда $\exists \theta(t)\colon [0,1]\to\R$ такая, что $\theta(t)$ - аргумент функции $\Gamma(t)$ с точностью до $2\pi k$, причём $\theta(t)\in C[0,1]$ 
+\end{theorem}
+\subsection{Приращение аргумента вдоль пути}
+\begin{definition}
+  Приращением аргумента вдоль пути $\Gamma$, не проходящего через точку 0, называется
+  \[\underset{\Gamma}{\Delta\arg} := \theta(1) - \theta(0)\]
+  где $\theta(t)$ - непрерывная функция аргумента пути. 
+\end{definition}
+\subsection{Приращение аргумента функции вдоль пути}
+\begin{definition}
+  Пусть $\Gamma\colon [0,1]\to \C\setminus \left\{0\right\}$, $f\colon \Gamma ([0,1])\to \C\setminus \left\{0\right\}$. Тогда приращением аргумента функции $f$ вдоль пути $\Gamma$ называется
+  \[\underset{\Gamma}{\Delta\arg f}:= \underset{f(\Gamma)}{\Delta\arg}\]
+\end{definition}
+\subsection{Принцип аргумента}
+\begin{lemma}
+  Пусть $\Gamma\colon [0,1]\to \C\setminus \left\{0\right\}$ и $\Gamma$ - замкнутый путь. Тогда
+  \[\int\limits_{\Gamma}\frac{1}{z}\d z = i \cdot \underset{\Gamma}{\Delta\arg}\]
+\end{lemma}
+\begin{proof}
+  По теореме Ньютона-Лейбница
+  \[\int\limits_{\Gamma}\frac{1}{z}\d z=\Phi(1) - \Phi(0) = \ln \left|\Gamma(1)\right|+i\theta(1) - \ln \left|\Gamma(0)\right| - i \theta(0) = i \left(\theta(1) - \theta(0)\right) = i \cdot \underset{\Gamma}{\Delta\arg}\]
+\end{proof}
+\begin{theorem}
+  Пусть функция $f$ мероморфна в $D$, $\overline{G}\subset D$, $\partial G$ - одна гладкая кривая, на $\partial G$ нет $\infty$ и нулей функции. Тогда
+  \[N(f,G) - P(f,G) = \frac{1}{2\pi} \underset{\partial G}{\Delta\arg f}\]
+\end{theorem}
+\begin{proof}
+  По теореме о числе нулей и полюсов мероморфной функции в области:
+  \[N(f,G) - P(f,G) = \frac{1}{2\pi i} \oint\limits_{\partial G}\frac{f'(z)}{f(z)}\d z = |\Gamma(t):=z,\q t\in[0,1]|=\frac{1}{2\pi i}\int_{0}^{1}\frac{f'(\Gamma(t))}{f(\Gamma(t))}\Gamma'(t)\d t=\]
+  \[=\frac{1}{2\pi i} \int_{0}^{1}\frac{1}{f(\Gamma(t))}\d f(\Gamma(t)) = \frac{1}{2\pi i} \int\limits_{f(\partial G)}\frac{1}{w}\d w = \frac{1}{2\pi i } \cdot i\cdot \underset{f(\partial G)}{\Delta\arg} = \frac{1}{2\pi} \underset{\partial G}{\Delta\arg f}\]
+\end{proof}
+\subsection{Теорема Руше}
+\begin{theorem}
+  Пусть $f,\hspace{0.1cm}g\in\O(D)$, $\overline{G}\subset D$, $\partial G$ - одна кривая; $f(z)\neq 0,\q g(z)\neq 0$ и $|f|>|g|$ на $\partial G$. Тогда
+  \[N(f+g,G) = N(f,G)\]
+\end{theorem}
+\begin{proof}
+  Заметим, что из-за голоморфности функций $f$ и $g$ мы всегда сможем сгладить кривую $\partial G$ с сохранением инвариантов. Тогда считаем, что $\partial G$ - одна гладкая кривая. 
+
+  По принципу аргумента, так как $P(f+g,G) = 0$, то
+  \[N(f+g,G) = \frac{1}{2\pi} \underset{\partial G}{\Delta\arg (f+g)} = \frac{1}{2\pi} \underset{\partial G}{\Delta\arg \left(f \cdot \left(1 + \frac{g}{f}\right)\right)}=\]
+  \[= \frac{1}{2\pi} \left(\underset{\partial G}{\Delta\arg f}+ \underset{\partial G}{\Delta\arg \left(1 + \frac{g}{f}\right)}\right)\]
+  Так как на $\partial G$ $|f|>|g|$, то $\Rea\left(1+\frac{g}{f}\right) > 0\implies \underset{\partial G}{\Delta\arg \left(1 + \frac{g}{f}\right)} = 0$:
+  \begin{center}
+    \includegraphics{4.png}
+  \end{center}
+  Значит
+  \[N(f+g,G) = \frac{1}{2\pi} \underset{\partial G}{\Delta\arg f} = N(f,G)\]
+\end{proof}
+\subsection{Основная теорема алгебры}
+\begin{theorem}
+  У многочлена степени $n$ ровно $n$ корней с учётом кратности. 
+\end{theorem}
+\begin{proof}
+  Пусть дан многочлен
+  \[P_n(z) = a_0+a_1z+\dots+a_nz^n\]
+  Обозначим
+  \[f(z):=a_nz^n,\q g(z) := a_0+a_1z+\dots+a_{n-1}z^{n-1}\]
+  Тогда $\exists R > 0\colon$ на окружности $\left\{|z|=R\right\}$ выполняется $|f(z)|>|g(z)|$. Значит
+  \[N(P_n, \left\{|z|<R\right\}) = N(f+g, \left\{|z|<R\right\}) = N(f, \left\{|z|<R\right\})\]
+  Но у $f(z) = a_nz^n$ один ноль кратности $n$ в этом круге, значит и у $P_n$ $n$ нулей в $\left\{|z|<R\right\}$. 
+
+  Если есть корень вне $\left\{|z|<R\right\}$, то он отличается от всех уже найденных, а значит у $P_n$ степень как минимум $n+1$ по теореме Безу - противоречие. 
+\end{proof}
+\section{Геометрические принципы}
+\subsection{Принцип сохранения области}
+\begin{theorem}
+  Пусть $D$ - область, $f\in\O(D)$ и $f\not\equiv const$. Тогда множество $D^*:= f(D)$ - тоже область.
+\end{theorem}
+\begin{proof}
+ Нужно проверить несколько свойств получившегося множества:
+  \begin{enumerate}
+    \item Связность. Пусть $A,\q B\in D^*$, тогда $A=f(a),\q B=f(b)$, где $a,b\in D\implies \exists \Gamma\colon [0,1]\to D\colon \Gamma(0)=a,\q \Gamma(1)=b\implies f(\Gamma(t))\in C[0,1]$, т.к. $f\in C(D)$.
+
+    Получаем, что $f(\Gamma(0)) = A,\q f(\Gamma(1)) = B$ и $\forall t\in(0,1)\q f(\Gamma(t))\in D^*$ по построению.  
+    \item Открытость. Возьмём произвольную точку $w_0:=f(z_0)\in D^*,\q z_0\in D$ и рассмотрим $\overline{U_\delta(z_0)}\subset D\colon f(z)\neq w_0\q\forall z\in \overline{\overset{\circ}{U}_\delta(z_0)}$. Такую окрестность можно найти по теореме об изолированности нулей голоморфной функции. Тогда
+    \[\e:=\min\limits_{z\in\partial U_\delta(z_0)}|f(z)-w_0|>0\]
+    Возьмём точку $w_1\in U_\e(w_0)$. Хотим показать, что $w_1=f(z_1)$ для некоторой точки $z_1\in D$, т.е. что $f(z)-w_1$ имеет 0 в $D$:
+    \[f(z)-w_1 = f(z) - w_0 + w_0 - w_1\]
+    Заметим, что на $\partial U_\delta(z_0)$
+    \[|f(z)-w_0| \geqslant \e\]
+    а $|w_0-w_1|<\e$ по построению. Получаем, что $|f(z)-w_0|>|w_0-w_1|$, а тогда
+    \begin{itemize}
+      \item Либо $w_1 = w_0$
+      \item Либо по теореме Руше
+      \[N(f(z)-w_1,\q U_\delta(z_0)) = N(f(z)-w_0,\q U_\delta(z_0))\geqslant 1\]
+      А значит $\exists z_1\in D\colon f(z_1) = w_1$
+    \end{itemize}
+  \end{enumerate}
+\end{proof}
+\subsection{Критерий локальной однолистности}
+\begin{theorem}
+  Пусть $f\in\O(D)$. Тогда следующие утверждения эквивалентны:
+  \begin{itemize}
+    \item $f$ локально однолистна в $D$, т.е. $\forall z_0\in D\q\exists U_\delta(z_0)\colon f$ - инъекция в $U_\delta(z_0)$
+    \item $f'(z)\neq 0\q\forall z\in D$
+  \end{itemize}
+\end{theorem}
+\begin{proof}
+ \begin{itemize}
+   \item[($\Leftarrow$):] Вспомним лемму из матана
+   \begin{lemma}
+     Пусть $f\colon \R^n\to\R^n,\q x_0\in \R^n,\q f\in C^{1}(U(x_0))$ и $\d f|_{x_0}$ обратим. Пусть $y_0=f(x_0)$.
+
+     Тогда $\exists U(y_0)\colon$ в ней $\exists g:=f^{-1}\colon U(y_0)\to U_\e(x_0)$, $g\in C^{1}(U(y_0))$ и $\d g|_{y_0} = \left(\d f|_{x_0}\right)^{-1}$
+    \end{lemma}
+    Зафиксируем произвольную точку $z_0\in D$. Так как $f\in\O(D), f'(z_0)\neq 0$ , то по определению $f$ конформна в точке $z_0$, а значит её дифференциал равен
+    \[\d f|_{z_0} = \begin{pmatrix}\cos(\ph)&-\sin(\ph)\\\sin(\ph)&\cos(\ph)\end{pmatrix}\cdot |f'(z_0)|\]
+      Тогда модуль его определителя будет равен
+      \[|\det \d f|_{z_0}| = 1\cdot |f'(z_0)|\neq 0\]
+      А значит дифференциал обратим. Пусть $w_0=f(z_0)$. Выполнены все условия леммы, а значит $\exists g=f^{-1}\colon$
+      \[\d g|_{w_0} = \left(\d f|_{x_0}\right)^{-1} = \frac{1}{|f'(z_0)|}\cdot \begin{pmatrix}\cos(\ph)&\sin(\ph)\\-\sin(\ph)&\cos(\ph)\end{pmatrix}\]
+        Из чего следует, что $g\in\O(U(w_0))$ по условию Коши-Римана. Получили биективность, а значит и инъективность в некоторой окрестности $U_\e(z_0)$ для произвольной $z_0\in D$. 
+    \item[($\Rightarrow$):] Пусть $\exists z_0\in D\colon f'(z_0) = 0,\dots,f^{(p-1)}(z_0) = 0$, а $f^{(p)}\neq 0$, $p>1$. Обозначим $w_0=f(z_0)$. 
+
+    У функции $f(z) - w_0$ ноль порядка $p$ в некоторой окрестности $U(z_0)$. Выберем по теореме об изолированности нулей $\overline{U_\delta(z_0)}\subset D\colon\forall z\in \overline{\overset{\circ}{U}_\delta(z_0)}\q f(z)\neq w_0,\q f'(z)\neq 0$. 
+
+    Обозначим за $\e:=\min\limits_{z\in\partial U_\delta(z_0)}|f(z)-w_0|>0$. Покажем, что каждое значение $w_1\in U_\e(w_0)$ принимается функцией $f(z)$ ровно $p$ раз в этой окрестности:
+    \[f(z)-w_1 = f(z) - w_0 + w_0 - w_1\]
+    \[|f(z) - w_0|\geqslant \e;\q |w_0-w_1|<\e\]
+    Значит по теореме Руше
+    \[N(f(z)-w_1, \q U_\delta(z_0)) = N(f(z) - w_0, \q U_\delta(z_0)) = p\]
+    Причём все нули простые, так как $f'(z)\neq 0\q\forall z\in \overline{\overset{\circ}{U}_\delta(z_0)}\implies$ каждое значение принимается ровно $p$ раз $\implies$ функция не локально однолистна в $z_0$, а значит и в $D$ - противоречие. 
+ \end{itemize}
+\end{proof}
+\subsection{Локальный принцип максимума модуля}
+\begin{theorem}
+  Пусть $f\in\O(D)$. Тогда, если $z_0\in D$ - локальный максимум $|f|$, то $f\equiv const$ 
+\end{theorem}
+\begin{proof}
+  Обозначим $w:=f(z_0)$. Тогда при $f\not\equiv const$ по принципу сохранения области $U_\e(w)\subset f(D)$, а значит  $\exists a\in U_\e(w)\colon |a|>|w|$ - противоречие:
+  \begin{center}
+    \includegraphics[scale=0.8]{5.png}
+  \end{center}
+\end{proof}
+\subsection{Принцип максимума модуля для ограниченной области}
+\begin{theorem}
+  Пусть $D$ - ограниченная область и $f\in\O(\overline{D})$. Тогда
+  \[\max\limits_{z\in\overline{D}}|f|=\max\limits_{z\in\partial D}|f|\]
+\end{theorem}
+\begin{proof}
+  Если $f\equiv const$ - то утверждение выполнено.
+
+  Если $f\not\equiv const$, то внутренних точек максимума модуля не может быть по предыдущей теореме.
+\end{proof}
+\subsection{Утверждение о минимуме модуля}
+\begin{theorem}
+  Пусть $f\in\O(\overline{D})$ и $f\not\equiv const$. Тогда либо $\exists z_0\in D\colon |f(z_0)|=0$, либо
+  \[\min\limits_{z\in\overline{D}}|f|=\min\limits_{z\in\partial D}|f|\]
+\end{theorem}
+\subsection{Лемма Шварца}
+\begin{lemma}
+  Пусть $U_1 = \left\{|z|<1\right\}$, $f\in\O(U_1)$, $f(0)=0$ и $\forall z\in U_1$ $|f(z)|\leqslant 1$. Тогда $\forall z\in U_1$ $|f(z)|\leqslant |z|$, причём если $\exists z_0\neq 0\colon |f(z_0)|=|z_0|$, то $f=e^{i\ph}z$
+\end{lemma}
+\begin{proof}
+  \begin{enumerate}
+    \item Введём функцию
+  \[g(z):=\begin{cases}
+    \frac{f(z)}{z}, &\text{ if } z\neq 0\\
+    f'(0), &\text{ if } z=0\\
+  \end{cases}\]
+  Так как $f(0) = 0$, то
+    \[\Lim{z}{0}\frac{f(z)-f(0)}{z} = f'(0)\]
+  Значит $g\in\O(U_1)$, так как мы доопределили УОТ.
+
+  Рассмотрим произвольный $r\in (0,1)$. Применим принцип максимума для ограниченной области $U_r = \left\{|z|<r\right\}$: $\forall z\in \overline{U_r}$
+  \[|g(z)|\leqslant \Sup{z\in\partial U_r}|g(z)| = \Sup{z\in\partial U_r} \left|\frac{f(z)}{z}\right| = \Sup{z\in\partial U_r} \frac{|f(z)|}{r}\leqslant \frac{1}{r}\]
+
+  Зафиксируем произвольную точку $z_1\in U_1$. Тогда для неё выполняется
+  \[|g(z_1)|\leqslant \frac{1}{r} \q\forall r\in(|z_1|,\q 1)\]
+  Устремим $r\to 1$, тогда
+  \[|g(z_1)|\leqslant 1\implies \left|\frac{f(z_1)}{z_1}\right|\leqslant 1\implies |f(z_1)|\leqslant |z_1|\]
+  Значит $\forall z\in U_1$ $|f(z)|\leqslant |z|$ 
+    \item Пусть $\exists z_0\in U_1\colon z_0\neq 0$ и $|f(z_0)|=|z_0|$. Так как $|g(z)|\leqslant 1\q\forall z\in U_1$, а $|g(z_0)| = 1$, то точка $z_0$ - локальный максимум модуля внутри области $\implies g\equiv const$ в $U_1$. Откуда получаем, что 
+    \[|g(z)| = 1\implies g(z) = e^{i\ph}\implies \frac{f(z)}{z}=e^{i\ph}\implies f(z) = e^{i\ph}z\]
+  \end{enumerate}
+\end{proof}
+\subsection{Теорема об автоморфизмах круга}
+\begin{implication}
+  Пусть $U_1 = \left\{|z|<1\right\}$, $f$ - конформное отображение $U_1\to U_1$. Тогда $f$ - ДЛО:
+  \[f(z) = e^{i\ph}\cdot \frac{z-a}{1-\overline{a}z}\]
+\end{implication}
+\begin{proof}
+ \begin{enumerate}
+   \item Если $f(0) = 0$, то работает лемма Шварца $\implies |f(z)|\leqslant |z|$. Так как $f$ - конформное отображение, то $\exists g:=f^{-1}\colon g(0) = 0$, а значит и для него работает лемма Шварца.
+
+   Возьмём произвольную $w\in U_1$, пусть $z=g(w)$, тогда
+   \[|z| = |g(w)|\leqslant |w| = |f(z)|\implies |f(z)|\geqslant |z|\]
+   Получаем, что $\forall z\in U_1\q |f(z)|=|z|\implies$ по лемме Шварца $f(z) = e^{i\ph}z$ - ДЛО с $a=0$. 
+   \item Пусть $b:=f(0)\neq 0$. Рассмотрим ДЛО
+   \[w(z):= \frac{z-b}{1-\overline{b}z}\]
+   Мы знаем (ну типо когда-то доказывали), что это автоморфизм круга, и $w(b) = 0$.
+
+   Так как $f$ конформно, то и $w(f(z))$ - автоморфизм круга, и $w(f(0)) = 0$ - опять выполняется лемма Шварца. Заметим, что $w(f(z))$ тоже конформное отображение, поэтому аналогично доказательству выше получаем:
+   \[w(f(z)) = e^{i\ph}z\implies \frac{f(z)-b}{1-\overline{b}f(z)}=e^{i\ph z}\]
+   \[f(z)-b = e^{i\ph}z - \overline{b}e^{i\ph}zf(z)\]
+   \[f(z)(1+\overline{b}e^{i\ph}z) = e^{i\ph}z + b\]
+   \[f(z) = \frac{b+e^{i\ph}z}{1+\overline{b}e^{i\ph}z} = e^{i\ph}\cdot\frac{z+be^{-i\ph}}{1+\overline{be^{-i\ph}}z}\]
+   Итого, при $a:= -be^{-i\ph}$
+   \[f(z) = e^{i\ph}\cdot \frac{z-a}{1-\overline{a}z}\]
+ \end{enumerate} 
+\end{proof}
+\subsection{Теорема Римана}
+\begin{theorem}
+  Пусть $D$ - односвязная область в $\C$, не совпадающая с $\C$. Тогда $\exists$ конформное отображение $D\to U_1 = \left\{|z|<1\right\}$ 
+\end{theorem}
