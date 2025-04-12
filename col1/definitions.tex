@@ -80,11 +80,11 @@
 \begin{definition}
   $f\colon D\to\overline{\C}$ конформна в области $D\subseteq \overline{\C}$, если $f$ конформна в каждой т. $D$ и инъективна (однолистна) в $D$.
 \end{definition}
-\subsection{Теорема об отображении границы области под действием отображения, конформного в этой
-области}
-\begin{theorem}
-  $f\in C(\overline{D})$ и $f$ конформна в $D$. $\gamma:=\partial D$ и $f(\gamma)=\widetilde{\gamma}$ - граница, которая задаёт область $\widetilde{D}$ с учётом обхода. Тогда $f(D)=\widetilde{D}$. 
-\end{theorem}
+% \subsection{Теорема об отображении границы области под действием отображения, конформного в этой
+% области}
+% \begin{theorem}
+%   $f\in C(\overline{D})$ и $f$ конформна в $D$. $\gamma:=\partial D$ и $f(\gamma)=\widetilde{\gamma}$ - граница, которая задаёт область $\widetilde{D}$ с учётом обхода. Тогда $f(D)=\widetilde{D}$. 
+% \end{theorem}
 \subsection{Сохранение углов между кривыми под действием конформного отображения}
 \begin{theorem}
   $f$ конформна в $z_0$; $\gamma_1,\gamma_2$ - гладкие кривые $\colon\q z_0\in \gamma_1,\gamma_2$. Тогда $\widetilde{\gamma_1}:=f(\gamma_1),\q \widetilde{\gamma_2}:=f(\gamma_2)$ - гладкие кривые, причём $\angle(\gamma_1,\gamma_2)|_{z_0} = \angle(\widetilde{\gamma_1},\widetilde{\gamma_2})|_{z_0}$ 
@@ -126,70 +126,10 @@
   Пусть $f\in\O(D)$. Тогда $\forall \Delta\colon \overline{\de} \in D$ выполнено:
   \[\oint\limits_{\partial\de}f(z)\d z=0\]
 \end{theorem}
-\subsection{Первообразная в области}
-\begin{definition}
-  Первообразной $f$ в области $D$ называется $F\in\O(D)\colon F'=f$.
-\end{definition}
-\subsection{Теорема о существовании первообразной в круге}
-\begin{theorem}
-  $f\in C(D)$ и $\forall \overline{\de}\in D\q \oint\limits_{\partial\de}f(z)\d z=0$, где $D=\left\{|z-a|<R\right\}$. Тогда $\exists F$ - первообразная $f$ в $D$. 
-\end{theorem}
-\subsection{Первообразная вдоль пути}
-\begin{definition}
-  $f\in C(D)$, $\g$ - путь $\colon [0,1]\to D$. Тогда $\Phi\colon [0,1]\to\C$ называется первообразной $f$ вдоль пути $\g$, если
-  \begin{enumerate}
-    \item $\Phi\in C([0,1])$
-    \item $\forall t_0\in[0,1]\q\exists U_\delta(t_0)\subset [0,1],\q\exists U_\e(z_0)\subset D$  (где $z_0=\g(t_0)$) такие, что $\exists F_\e$ - первообразная $f$ в $U_\e(z_0)\colon \Phi(t) = F_\e(\g(t))\q\forall t\in U_\delta(t_0)$. 
-  \end{enumerate}
-\end{definition}
-\subsection{Теорема о существовании первообразной вдоль пути}
-\begin{theorem}
-  $f\in\O(D),\q \g\colon[0,1]\to D$ - путь. Тогда $\exists$ первообразная вдоль пути $\Phi(t)$ и любые две из первообразных отличаются на константу. 
-\end{theorem}
-\subsection{Формула Ньютона-Лейбница для голоморфной функции}
-\begin{theorem}
-  $f\in\O(D),\q \g\colon [0,1]\to D$, $\Phi$  - первообразная вдоль пути $\g$. Тогда
-  \[\int_{\g}f(z)\d z = \Phi(1) - \Phi(0)\]
-\end{theorem}
-\subsection{Гомотопные пути}
-\begin{definition}
-  $\g_0,\g_1\colon [0,1]\to D,\q \g_0(0)=\g_1(0)=:a$ и $\g_0(1) = \g_1(1) =: b$.
-
-  Тогда $\g_0$ гомотопен $\g_1$ в $D$, если $\exists\g\colon[0,1]^2\to D\colon \g\in C([0,1]^2)$ и $\g(0,t)=\g_0(t),\q \g(1,t)=\g_1(t)$ и $\forall s \in [0,1]$:
-  \[ 
-  \begin{cases}
-    \g(s,0)=a\\
-    \g(s,1)=b\\
-  \end{cases}\]
-  \begin{center}
-  \includegraphics{4.png}
-  \end{center}
-
-  Обозначение: $\g_0\sim\g_1$
-\end{definition}
-\begin{definition}
-  Замкнутые пути $\g_0,\g_1\colon [0,1]\to D$ называют гомотопными, если $\exists\g\colon[0,1]^2\to D\colon \g\in C([0,1]^2)$ и $\g(0,t)=\g_0(t),\q \g(1,t)=\g_1(t)$ и $\forall s \in [0,1]$ $\g(s,0)=\g(s,1)$. 
-
-  Замкнутый путь гомотопен 0 $(\g\sim0)$, если он гомотопен постоянному пути $\g_1\equiv const$, т.е. если можно сжать путь в точку.
-\end{definition}
-\subsection{Теорема о гомотопии (об интегралах вдоль гомотопных путей)}
-\begin{theorem}
-  $f\in\O(D)$ и $\g_0\sim\g_1$ в $D$. Тогда
-  \[\int_{\g_1}f(z)\d z=\int_{\g_2}f(z)\d z\]
-\end{theorem}
 \subsection{Интегральная теорема Коши для односвязной области}
 \begin{theorem}
   $D$ - односвязная область, $f\in\O(D)$, $\g\colon[0,1]\to D$ - замкнутый путь. Тогда
   \[\oint\limits_{\g}f(z)\d z=0\]
-\end{theorem}
-\subsection{Теорема о существовании первообразной в односвязной области}
-\begin{theorem}
-  $D$ - односвязная область, $f\in\O(D)$. Тогда $\exists F$ - первообразная $f$ в $D$. 
-\end{theorem}
-\subsection{Критерий существования первообразной в произвольной области}
-\begin{theorem}
-  Если $f\in\O(D)$ и $\oint\limits_{\g}f(z)\d z = 0$ $\forall\g$ - замкнутого пути, то $\exists F$ - первообразная $f$ в $D$. 
-
 \end{theorem}
 \subsection{Интегральная теорема Коши для многосвязной области}
 \begin{theorem}
@@ -203,6 +143,68 @@
   $f\in\O(G),\q \overline{D}\subset G,\q \partial D$ - простая. Тогда $\forall z\in D$
   \[f(z) = \frac{1}{2\pi i} \oint\limits_{\partial D^+}\frac{f(\zeta)}{\zeta - z}\d \zeta\]
 \end{theorem}
+\subsection{Первообразная в области}
+\begin{definition}
+  Первообразной $f$ в области $D$ называется $F\in\O(D)\colon F'=f$.
+\end{definition}
+\subsection{Теорема о существовании первообразной в круге}
+\begin{theorem}
+  $f\in C(D)$ и $\forall \overline{\de}\in D\q \oint\limits_{\partial\de}f(z)\d z=0$, где $D=\left\{|z-a|<R\right\}$. Тогда $\exists F$ - первообразная $f$ в $D$. 
+\end{theorem}
+% \subsection{Первообразная вдоль пути}
+% \begin{definition}
+%   $f\in C(D)$, $\g$ - путь $\colon [0,1]\to D$. Тогда $\Phi\colon [0,1]\to\C$ называется первообразной $f$ вдоль пути $\g$, если
+%   \begin{enumerate}
+%     \item $\Phi\in C([0,1])$
+%     \item $\forall t_0\in[0,1]\q\exists U_\delta(t_0)\subset [0,1],\q\exists U_\e(z_0)\subset D$  (где $z_0=\g(t_0)$) такие, что $\exists F_\e$ - первообразная $f$ в $U_\e(z_0)\colon \Phi(t) = F_\e(\g(t))\q\forall t\in U_\delta(t_0)$. 
+%   \end{enumerate}
+% \end{definition}
+% \subsection{Теорема о существовании первообразной вдоль пути}
+% \begin{theorem}
+%   $f\in\O(D),\q \g\colon[0,1]\to D$ - путь. Тогда $\exists$ первообразная вдоль пути $\Phi(t)$ и любые две из первообразных отличаются на константу. 
+% \end{theorem}
+\subsection{Формула Ньютона-Лейбница для голоморфной функции}
+\begin{theorem}
+  $f\in\O(D),\q \g\colon [0,1]\to D$, $\Phi$  - первообразная вдоль пути $\g$. Тогда
+  \[\int_{\g}f(z)\d z = \Phi(1) - \Phi(0)\]
+\end{theorem}
+% \subsection{Гомотопные пути}
+% \begin{definition}
+%   $\g_0,\g_1\colon [0,1]\to D,\q \g_0(0)=\g_1(0)=:a$ и $\g_0(1) = \g_1(1) =: b$.
+
+%   Тогда $\g_0$ гомотопен $\g_1$ в $D$, если $\exists\g\colon[0,1]^2\to D\colon \g\in C([0,1]^2)$ и $\g(0,t)=\g_0(t),\q \g(1,t)=\g_1(t)$ и $\forall s \in [0,1]$:
+%   \[ 
+%   \begin{cases}
+%     \g(s,0)=a\\
+%     \g(s,1)=b\\
+%   \end{cases}\]
+%   \begin{center}
+%   \includegraphics{4.png}
+%   \end{center}
+
+%   Обозначение: $\g_0\sim\g_1$
+% \end{definition}
+% \begin{definition}
+%   Замкнутые пути $\g_0,\g_1\colon [0,1]\to D$ называют гомотопными, если $\exists\g\colon[0,1]^2\to D\colon \g\in C([0,1]^2)$ и $\g(0,t)=\g_0(t),\q \g(1,t)=\g_1(t)$ и $\forall s \in [0,1]$ $\g(s,0)=\g(s,1)$. 
+
+%   Замкнутый путь гомотопен 0 $(\g\sim0)$, если он гомотопен постоянному пути $\g_1\equiv const$, т.е. если можно сжать путь в точку.
+% \end{definition}
+% \subsection{Теорема о гомотопии (об интегралах вдоль гомотопных путей)}
+% \begin{theorem}
+%   $f\in\O(D)$ и $\g_0\sim\g_1$ в $D$. Тогда
+%   \[\int_{\g_1}f(z)\d z=\int_{\g_2}f(z)\d z\]
+% \end{theorem}
+
+\subsection{Критерий существования первообразной в произвольной области}
+\begin{theorem}
+  Если $f\in\O(D)$ и $\oint\limits_{\g}f(z)\d z = 0$ $\forall\g$ - замкнутого пути, то $\exists F$ - первообразная $f$ в $D$.
+\end{theorem}
+\subsection{Теорема о существовании первообразной в односвязной области}
+\begin{theorem}
+  $D$ - односвязная область, $f\in\O(D)$. Тогда $\exists F$ - первообразная $f$ в $D$. 
+\end{theorem}
+
+
 \subsection{Теорема об интеграле вдоль пути от равномерно сходящейся последовательности функций}
 \begin{theorem}
   $f_n\overset{\gamma}{\rightrightarrows}f$ и $\gamma$ - гладкая кривая, $f_n\in C(\gamma)$. Тогда
@@ -282,6 +284,12 @@
     \item В некоторой $U(a)$ $f(z)=\Sum{n=0}{+\infty}c_n(z-a)^n\q\forall z\in U(a)$ 
     \item В некоторой $U(a)$ выполняется условие треугольника, т.е. $f\in C(U(a))$ и \[\forall\overline{\Delta}\subset U(a)\q \oint\limits_{\partial \Delta}f(z)\d z=0\] 
   \end{enumerate}
+\end{theorem}
+\subsection{Теорема о связи между голоморфными и гармоническими функциями}
+\begin{theorem}
+  Пусть $f \in \O(D)$. Тогда $u(x, y) = \Rea f(z)$ гармонична в $D$. 
+  
+  Обратно, если $D$ односвязная и $u : D \to \R$ гармонична, то существует единственная с точностью до мнимой константы функция $f \in \O(D)$ такая, что $\Rea f = u(x, y)$ для всех $z \in D$.
 \end{theorem}
 \subsection{Теорема о представлении голоморфной функции в окрестности нуля}
 \begin{theorem}
