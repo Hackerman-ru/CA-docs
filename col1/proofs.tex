@@ -476,18 +476,23 @@
 \begin{proof}
   \textit{(тут возможны баги).}
   \begin{enumerate}
-    \item $f_{n} \overset{\overline{U_{R}(a)}}{\rightrightarrows} f \implies f \in C(\overline{U_{r}(a)}) \implies f$ непрерывна в точке $a$ $\forall a \in D$. Значит $f \in C(D)$.
-    Пусть $\Delta$~--- треугольник. $\overline{\Delta} \subset D$. $\displaystyle \oint_{\partial \Delta} f(z) \d z = \oint_{\partial \Delta} \Lim{n}{\infty} f(z) \d z = |\text{равн. сход.}| = \Lim{n}{\infty} \underbrace{\oint_{\partial \Delta} f(z) \d z}_{= 0 \text{ по лемме Гурса}} = 0$. 
-    Тогда по теореме Мореры $f \in \O(D)$.
-    \item Покажем, что $\exists \overline{U_{R}(a)}$ такая, что $f_{n}^{(N)} \overset{\overline{U_{R}(a)}}{\rightrightarrows} f^{(N)}$. Рассмотрим $R$ такое, что $\overline{U_{R}(a)} \subset D$, возьмем $0 < r < R$.
-    Покажем, что есть равномерная сходимость на $\overline{U_{r}(a)}$
+    \item $\forall a\in D$, так как $\overline{U_{R}(a)}$ - компакт, то $f_{n} \overset{\overline{U_{R}(a)}}{\rightrightarrows} f \implies f \in C(\overline{U_{r}(a)}) \implies f$ непрерывна в точке $a$. Значит $f \in C(D)$.
+
+    Пусть $\Delta$~--- треугольник $\colon \overline{\Delta} \subset D$. Тогда 
+    \[\oint_{\partial \Delta} f(z) \d z = \oint_{\partial \Delta} \Lim{n}{\infty} f_n(z) \d z = |\text{равн. сход.}| = \Lim{n}{\infty} \underbrace{\oint_{\partial \Delta} f_n(z) \d z}_{= 0 \text{ по лемме Гурса}} = 0\]
+    Значит по теореме Мореры $f \in \O(D)$.
+    \item Пусть $K\subset D$ - компакт. Докажем, что $\forall a \in K \q \exists \overline{U_{r}(a)} \colon f_{n}^{(N)} \overset{\overline{U_{r}(a)}}{\rightrightarrows} f^{(N)}$.
+
+      Рассмотрим $R \colon \overline{U_{R}(a)} \subset D$, возьмем $0 < r < R$.
+    Покажем, что есть равномерная сходимость:
     \begin{multline*}
       \sup_{z \in \overline{U_{r}(a)}} |f_{n}^{(N)}(z) - f^{(N)}(z)| = 
       |\text{ИФК}| = 
-      \sup_{z \in \overline{U_{r}(a)}} \frac{N!}{2 \pi i} \oint_{|\zeta - a| = R} \frac{f_{n}(\zeta) - f(\zeta)}{(\zeta - z)^{N + 1}} \d \zeta \leq\\\leq
-      \frac{N!}{2 \pi i} \sup_{z \in \overline{U_{r}(a)}} 2\pi R \cdot \sup_{|\zeta - a| = R} \frac{|f_{n}(\zeta) - f(\zeta)|}{|(\zeta - z)^{N + 1}|} \leq 
-      \frac{N! R}{R \cdot r} \underbrace{\sup_{|\zeta - a| = R} |f_{n}(\zeta) - f(\zeta)|}_{\text{есть $\rightrightarrows$ на компакте}}
+      \sup_{z \in \overline{U_{r}(a)}}\left|\frac{N!}{2 \pi i} \oint_{|\zeta - a| = R} \frac{f_{n}(\zeta) - f(\zeta)}{(\zeta - z)^{N + 1}} \d \zeta\right|\leq \\\leq\frac{N!}{2 \pi} \sup_{z \in \overline{U_{r}(a)}} \left|\oint_{|\zeta - a| = R} \frac{f_{n}(\zeta) - f(\zeta)}{(\zeta - z)^{N + 1}} \d \zeta\right| \leq
+      \frac{N!}{2 \pi} \sup_{z \in \overline{U_{r}(a)}} 2\pi R \cdot \sup_{|\zeta - a| = R} \frac{|f_{n}(\zeta) - f(\zeta)|}{|(\zeta - z)^{N + 1}|} \leq\\\leq 
+      \frac{N! R}{(R-r)^{N+1}} \underbrace{\sup_{|\zeta - a| = R} |f_{n}(\zeta) - f(\zeta)|}_{\text{есть $\rightrightarrows$ на компакте}}
     \end{multline*}
-    Рассмотрим $K$~--- компакт и $\{ U_{r(a)}(a) \}$ такие, что на $U_{r(a)}(a)$ есть равномерная сходимость, выберем конечное подпокрытие $K$ c $\bigcup_{j = 1}^{M} U_{r(a_{j})}(a_{j}) \implies f_n^{(N)}\overset{K}{\rightrightarrows}f^{(N)}$ 
+    Теперь выберем конечное подпокрытие $K$ c $\bigcup_{j = 1}^{M} \overline{U_{r_j}(a_{j})} \implies f_n^{(N)}\overset{K}{\rightrightarrows}f^{(N)}$ 
   \end{enumerate}
 \end{proof}
+
